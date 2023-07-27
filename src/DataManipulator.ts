@@ -10,14 +10,14 @@ export interface Row {
   trigger_alert: number | undefined,
 }
 
-
+//+/-10% of the 12 month historical average ratio (i.e. 1.1 and 0.99)
 export class DataManipulator {
   static generateRow(serverRespond: ServerRespond[]): Row {
     const priceABC = (serverRespond [0].top_ask.price + serverRespond [0].top_bid.price) / 2;
     const priceDEF = (serverRespond[1].top_ask.price + serverRespond[1].top_bid.price) / 2;
     const ratio = priceABC / priceDEF;
-    const upperBound = 1 + 0.05;
-    const lowerBound = 1- 0.05;
+    const upperBound = 1 + 0.1;
+    const lowerBound = 1 - 0.1;
     return {
        price_abc: priceABC,
        price_def: priceDEF,
